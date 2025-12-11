@@ -1,6 +1,8 @@
 buildscript {
-  ext.getExtOrDefault = {name ->
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['VisionCameraMlkitFaces_' + name]
+  ext.getExtOrDefault = { name ->
+    return rootProject.ext.has(name)
+            ? rootProject.ext.get(name)
+            : project.properties['VisionCameraMlkitFaces_' + name]
   }
 
   repositories {
@@ -9,44 +11,23 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:8.7.2"
-    // noinspection DifferentKotlinGradleVersion
+    classpath "com.android.tools.build:gradle:8.5.2"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
   }
 }
 
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
-
 apply plugin: "com.facebook.react"
-
-def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["VisionCameraMlkitFaces_" + name]).toInteger()
-}
 
 android {
   namespace "com.visioncameramlkitfaces"
 
-  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+  compileSdkVersion 34
 
   defaultConfig {
-    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
-    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
-  }
-
-  buildFeatures {
-    buildConfig true
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-    }
-  }
-
-  lintOptions {
-    disable "GradleCompatible"
+    minSdkVersion 24
+    targetSdkVersion 34
   }
 
   compileOptions {
@@ -54,26 +35,18 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
-  sourceSets {
-    main {
-      java.srcDirs += [
-        "generated/java",
-        "generated/jni"
-      ]
-    }
+  kotlinOptions {
+    jvmTarget = '1.8'
   }
 }
 
 repositories {
-  mavenCentral()
   google()
+  mavenCentral()
 }
-
-def kotlin_version = getExtOrDefault("kotlinVersion")
 
 dependencies {
   implementation "com.facebook.react:react-android"
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.mlkit:face-detection:16.1.6'
-
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:${getExtOrDefault('kotlinVersion')}"
+  implementation "com.google.mlkit:face-detection:16.1.6"
 }

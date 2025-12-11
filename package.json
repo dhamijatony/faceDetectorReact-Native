@@ -1,6 +1,6 @@
 {
   "name": "react-native-vision-camera-mlkit-faces",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "face detecotr",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

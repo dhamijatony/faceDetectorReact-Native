@@ -1,5 +1,9 @@
-import VisionCameraMlkitFaces from './NativeVisionCameraMlkitFaces';
+import NativeFaces from './NativeVisionCameraMlkitFaces';
 
-export function multiply(a: number, b: number): number {
-  return VisionCameraMlkitFaces.multiply(a, b);
+export async function detectFaces(base64Image: string) {
+  return await NativeFaces.detectFaces(base64Image);
 }
+
+export default {
+  detectFaces,
+};

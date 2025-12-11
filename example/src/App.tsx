@@ -1,7 +1,8 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'react-native-vision-camera-mlkit-faces';
+import { detectFaces } from 'react-native-vision-camera-mlkit-faces';
 
-const result = multiply(3, 7);
+const base64String = '';
+const result = detectFaces(base64String);
 
 export default function App() {
   return (

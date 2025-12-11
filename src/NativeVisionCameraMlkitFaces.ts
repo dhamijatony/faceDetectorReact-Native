@@ -1,7 +1,11 @@
-import { TurboModuleRegistry, type TurboModule } from 'react-native';
+import { TurboModuleRegistry } from 'react-native';
 
-export interface Spec extends TurboModule {
-  multiply(a: number, b: number): number;
+export interface Spec {
+  detectFaces(base64Image: string): Promise<any[]>;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('VisionCameraMlkitFaces');
+const module = TurboModuleRegistry.getEnforcing(
+  'VisionCameraMlkitFaces'
+) as Spec;
+
+export default module;

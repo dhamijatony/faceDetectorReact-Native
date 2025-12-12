@@ -2,7 +2,7 @@ package com.visioncameramlkitfaces
 
 import android.graphics.Rect
 import android.view.Surface
-import com.mrousavy.camera.core.types.Position
+import com.mrousavy.camera.frameprocessors.Position
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceLandmark
 import com.google.mlkit.vision.face.FaceContour
@@ -28,7 +28,7 @@ class FaceDetectorCommon() {
     autoMode: Boolean = false,
     cameraFacing: Position = Position.FRONT,
     orientation: Int? = Surface.ROTATION_0
-  ): Map<String, Any>  {
+  ): Map<String, Any> {
     val bounds: MutableMap<String, Any> = HashMap()
     val width = boundingBox.width().toDouble() * scaleX
     val height = boundingBox.height().toDouble() * scaleY
@@ -40,10 +40,10 @@ class FaceDetectorCommon() {
     bounds["x"] = x * scaleX
     bounds["y"] = y * scaleY
 
-    if(!autoMode) return bounds
+    if (!autoMode) return bounds
 
     // using front camera
-    if(cameraFacing == Position.FRONT) {
+    if (cameraFacing == Position.FRONT) {
       when (orientation) {
         // device is portrait
         Surface.ROTATION_0 -> {
@@ -83,7 +83,7 @@ class FaceDetectorCommon() {
       }
       // device is upside down
       Surface.ROTATION_180 -> {
-        bounds["x"] =((-x * scaleX) + sourceWidth * scaleX) - width
+        bounds["x"] = ((-x * scaleX) + sourceWidth * scaleX) - width
         bounds["y"] = ((-y * scaleY) + sourceHeight * scaleY) - height
       }
       // device is landscape left
@@ -143,8 +143,8 @@ class FaceDetectorCommon() {
       currentPointsMap["x"] = x * scaleX
       currentPointsMap["y"] = y * scaleY
 
-      if(autoMode) {
-        if(cameraFacing == Position.FRONT) {
+      if (autoMode) {
+        if (cameraFacing == Position.FRONT) {
           // using front camera
           when (orientation) {
             // device is portrait
@@ -187,7 +187,7 @@ class FaceDetectorCommon() {
             }
             // device is upside down
             Surface.ROTATION_180 -> {
-              currentPointsMap["x"] =((-x * scaleX) + sourceWidth * scaleX)
+              currentPointsMap["x"] = ((-x * scaleX) + sourceWidth * scaleX)
               currentPointsMap["y"] = ((-y * scaleY) + sourceHeight * scaleY)
             }
             // device is landscape left
@@ -201,7 +201,7 @@ class FaceDetectorCommon() {
             }
           }
         }
-      } 
+      }
 
       faceLandmarksTypesMap[landmarkName] = currentPointsMap
     }
@@ -269,8 +269,8 @@ class FaceDetectorCommon() {
         currentPointsMap["x"] = points[j].x.toDouble() * scaleX
         currentPointsMap["y"] = points[j].y.toDouble() * scaleY
 
-        if(autoMode) {
-          if(cameraFacing == Position.FRONT) {
+        if (autoMode) {
+          if (cameraFacing == Position.FRONT) {
             // using front camera
             when (orientation) {
               // device is portrait
@@ -313,7 +313,7 @@ class FaceDetectorCommon() {
               }
               // device is upside down
               Surface.ROTATION_180 -> {
-                currentPointsMap["x"] =((-x * scaleX) + sourceWidth * scaleX)
+                currentPointsMap["x"] = ((-x * scaleX) + sourceWidth * scaleX)
                 currentPointsMap["y"] = ((-y * scaleY) + sourceHeight * scaleY)
               }
               // device is landscape left
@@ -410,7 +410,7 @@ class FaceDetectorCommon() {
   ): ArrayList<Map<String, Any>> {
     val result = ArrayList<Map<String, Any>>()
 
-    faces.forEach{face ->
+    faces.forEach { face ->
       val map: MutableMap<String, Any> = HashMap()
 
       if (runLandmarks) {

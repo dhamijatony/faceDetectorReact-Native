@@ -22,14 +22,16 @@ class VisionCameraFaceDetectorPluginPackage: ReactPackage {
     }
 
     fun stopDeviceOrientationListener() {
-      orientationManager?.stopDeviceOrientationListener()
+      
+      orientationManager?.stop()
+
       orientationManager = null
     }
   }
 
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
     return listOf(
-      VisionCameraFaceDetectorOrientationManager(reactContext),
+            VisionCameraFaceDetectorModule(reactContext),
       ImageFaceDetectorModule(reactContext)
     )
   }

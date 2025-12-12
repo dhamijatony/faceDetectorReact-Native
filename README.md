@@ -4,23 +4,19 @@ face detecotr
 
 ## Installation
 
-
 ```sh
 npm install react-native-vision-camera-mlkit-faces
 ```
 
-
 ## Usage
 
-
 ```js
-import { multiply } from 'react-native-vision-camera-mlkit-faces';
+import { multiply } from "react-native-vision-camera-mlkit-faces";
 
 // ...
 
 const result = multiply(3, 7);
 ```
-
 
 ## Contributing
 
